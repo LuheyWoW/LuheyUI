@@ -1,0 +1,7 @@
+<Bindings>
+  <Binding name="LUHEYUI_TOGGLE_OPTIONS" category="LuheyUI">
+    if LuheyUI and LuheyUI.GUI then
+      LuheyUI.GUI:Toggle()
+    end
+  </Binding>
+</Bindings>

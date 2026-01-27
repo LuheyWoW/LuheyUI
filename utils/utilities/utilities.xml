@@ -1,0 +1,10 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="lui_uihider.lua"/>
+    <Script file="lui_perfectpixel.lua"/>
+    <Script file="lui_keybinds.lua"/>
+    <Script file="lui_minimap.lua"/>
+    <Script file="lui_nudge.lua"/>
+    <Script file="lui_resourcebars.lua"/>
+    <Script file="lui_ncdm.lua"/>
+    <Script file="lui_customtrackers.lua"/>
+</Ui>

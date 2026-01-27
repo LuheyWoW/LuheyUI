@@ -1,0 +1,9 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="lui_rotationassist.lua"/>
+    <Script file="lui_spellscanner.lua"/>
+    <Script file="lui_qol.lua"/>
+    <Script file="lui_quicksalvage.lua"/>
+    <Script file="lui_skyriding.lua"/>
+    <Script file="lui_chat.lua"/>
+    <Script file="lui_tooltips.lua"/>
+</Ui>

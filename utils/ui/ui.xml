@@ -1,0 +1,6 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="lui_gui.lua"/>
+    <Script file="lui_castbar_options.lua"/>
+    <Script file="lui_options.lua"/>
+    <Script file="lui_blizzard_options.lua"/>
+</Ui>

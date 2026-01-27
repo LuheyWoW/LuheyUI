@@ -1,0 +1,4 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="lui_character.lua"/>
+    <Script file="lui_inspect_ilvl_lite.lua"/>
+</Ui>

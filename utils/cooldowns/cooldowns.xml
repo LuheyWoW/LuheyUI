@@ -1,0 +1,6 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="lui_cooldownmanager.lua"/>
+    <Script file="lui_customglows.lua"/>
+    <Script file="lui_cooldowneffects.lua"/>
+    <Script file="lui_cooldownswipe.lua"/>
+</Ui>

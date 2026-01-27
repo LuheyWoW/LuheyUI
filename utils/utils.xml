@@ -1,0 +1,15 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+    <Include file="core\core.xml"/>
+    <Include file="cooldowns\cooldowns.xml"/>
+    <Include file="utilities\utilities.xml"/>
+    <Include file="buffs\buffs.xml"/>
+    <Include file="actionbars\actionbars.xml"/>
+    <Include file="unitframes\unitframes.xml"/>
+    <Include file="datatexts\datatexts.xml"/>
+    <Include file="dungeons\dungeons.xml"/>
+    <Include file="overlays\overlays.xml"/>
+    <Include file="panels\panels.xml"/>
+    <Include file="qol\qol.xml"/>
+    <Include file="ui\ui.xml"/>
+</Ui>

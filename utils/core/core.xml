@@ -1,0 +1,6 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="lui_shared.lua"/>
+    <Script file="lui_media.lua"/>
+    <Script file="lui_backwards.lua"/>
+    <Script file="lui_main.lua"/>
+</Ui>

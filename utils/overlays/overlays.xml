@@ -1,0 +1,6 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="lui_reticle.lua"/>
+    <Script file="lui_combattext.lua"/>
+    <Script file="lui_combattimer.lua"/>
+    <Script file="lui_crosshair.lua"/>
+</Ui>

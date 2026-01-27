@@ -1,0 +1,17 @@
+## Interface: 120000, 120001
+## Title: |cFF30D1FFLuhey UI|r
+## IconTexture: Interface\AddOns\LuheyUI\assets\luheyLogo
+## AddonCompartmentFunc: LuheyUI_CompartmentClick
+## AddonCompartmentFuncOnEnter: LuheyUI_CompartmentOnEnter
+## AddonCompartmentFuncOnLeave: LuheyUI_CompartmentOnLeave
+## Notes: Installer for |cFF30D1FFLuhey|r UI
+## Author: Luhey (Originally by Quazii)
+## Version: 2.0.0
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: LuheyUI_DB, LuheyUIDB, QuaziiUI_DB, QuaziiUIDB
+
+## X-Contributors: Luhey, Quazii
+## X-License: GPLv3
+
+load.xml

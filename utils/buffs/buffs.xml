@@ -1,0 +1,5 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="lui_buffborders.lua"/>
+    <Script file="lui_buffbar.lua"/>
+    <Script file="lui_raidbuffs.lua"/>
+</Ui>

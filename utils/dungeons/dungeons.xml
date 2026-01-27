@@ -1,0 +1,7 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="lui_dungeon_data.lua"/>
+    <Script file="lui_keystone.lua"/>
+    <Script file="lui_mplus_timer.lua"/>
+    <Script file="lui_dungeon_teleport.lua"/>
+    <Script file="lui_key_tracker.lua"/>
+</Ui>
