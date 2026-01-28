@@ -1,0 +1,46 @@
+name: Build WoW Addon Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set variables
+        id: vars
+        run: |
+          echo "TAG_NAME=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          echo "ADDON_NAME=LuheyUI" >> $GITHUB_ENV
+
+      - name: Create addon zip (WowUp-friendly)
+        run: |
+          set -euo pipefail
+
+          mkdir -p dist
+
+          # Ensure the zip contains: LuheyUI/... at the root
+          zip -r "dist/${ADDON_NAME}-${TAG_NAME}.zip" "${ADDON_NAME}" \
+            -x "${ADDON_NAME}/.git/*" \
+               "${ADDON_NAME}/.github/*" \
+               "${ADDON_NAME}/.gitignore" \
+               "${ADDON_NAME}/**:Zone.Identifier"
+
+          ls -lh dist
+
+      - name: Create GitHub Release and upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          name: ${{ env.TAG_NAME }}
+          files: dist/*.zip
+          generate_release_notes: true
