@@ -46,14 +46,15 @@ jobs:
               --exclude="**:Zone.Identifier"
           fi
 
+          # Build a STABLE filename so WowUp "Install from URL" can always fetch latest
           cd package
-          zip -r "../dist/${ADDON_NAME}-${TAG_NAME}.zip" "${ADDON_NAME}"
+          zip -r "../dist/${ADDON_NAME}.zip" "${ADDON_NAME}"
           cd ..
 
           ls -lh dist
-          unzip -l "dist/${ADDON_NAME}-${TAG_NAME}.zip" | head -n 50
+          unzip -l "dist/${ADDON_NAME}.zip" | head -n 50
 
-      - name: Upload release asset (stable)
+      - name: Create/Update GitHub Release and upload asset (stable)
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
