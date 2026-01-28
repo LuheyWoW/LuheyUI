@@ -17,7 +17,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set variables
-        id: vars
         run: |
           echo "TAG_NAME=${GITHUB_REF_NAME}" >> $GITHUB_ENV
           echo "ADDON_NAME=LuheyUI" >> $GITHUB_ENV
@@ -25,17 +24,34 @@ jobs:
       - name: Create addon zip (WowUp-friendly)
         run: |
           set -euo pipefail
-
           mkdir -p dist
 
-          # Ensure the zip contains: LuheyUI/... at the root
-          zip -r "dist/${ADDON_NAME}-${TAG_NAME}.zip" "${ADDON_NAME}" \
-            -x "${ADDON_NAME}/.git/*" \
-               "${ADDON_NAME}/.github/*" \
-               "${ADDON_NAME}/.gitignore" \
-               "${ADDON_NAME}/**:Zone.Identifier"
+          # Build a clean staging folder so the ZIP has LuheyUI/ at the root
+          rm -rf package
+          mkdir -p "package/${ADDON_NAME}"
+
+          # If repo already has LuheyUI/ folder, copy that folder.
+          # Otherwise, copy repo root contents into package/LuheyUI excluding git + workflow stuff.
+          if [ -d "${ADDON_NAME}" ]; then
+            rsync -a "${ADDON_NAME}/" "package/${ADDON_NAME}/" \
+              --exclude=".git" \
+              --exclude=".github" \
+              --exclude="**:Zone.Identifier"
+          else
+            rsync -a "./" "package/${ADDON_NAME}/" \
+              --exclude=".git" \
+              --exclude=".github" \
+              --exclude="dist" \
+              --exclude="package" \
+              --exclude="**:Zone.Identifier"
+          fi
+
+          cd package
+          zip -r "../dist/${ADDON_NAME}-${TAG_NAME}.zip" "${ADDON_NAME}"
+          cd ..
 
           ls -lh dist
+          unzip -l "dist/${ADDON_NAME}-${TAG_NAME}.zip" | head -n 50
 
       - name: Create GitHub Release and upload asset
         uses: softprops/action-gh-release@v2
