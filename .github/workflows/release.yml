@@ -58,6 +58,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.TAG_NAME }}
-          file: dist/${{ env.ADDON_NAME }}-${{ env.TAG_NAME }}.zip
-          asset_name: ${{ env.ADDON_NAME }}-${{ env.TAG_NAME }}.zip
+          file: dist/${{ env.ADDON_NAME }}.zip
+          asset_name: ${{ env.ADDON_NAME }}.zip
           overwrite: true
