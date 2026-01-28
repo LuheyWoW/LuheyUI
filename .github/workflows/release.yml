@@ -53,17 +53,11 @@ jobs:
           ls -lh dist
           unzip -l "dist/${ADDON_NAME}-${TAG_NAME}.zip" | head -n 50
 
-      - name: Create/Update GitHub Release and upload asset
-        uses: softprops/action-gh-release@v2
+      - name: Upload release asset (stable)
+        uses: svenstaro/upload-release-action@v2
         with:
-          tag_name: ${{ env.TAG_NAME }}
-          name: ${{ env.TAG_NAME }}
-          files: dist/*.zip
-          fail_on_unmatched_files: true
-          generate_release_notes: false
-          draft: false
-          prerelease: false
-          make_latest: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.TAG_NAME }}
+          file: dist/${{ env.ADDON_NAME }}-${{ env.TAG_NAME }}.zip
+          asset_name: ${{ env.ADDON_NAME }}-${{ env.TAG_NAME }}.zip
           overwrite: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
