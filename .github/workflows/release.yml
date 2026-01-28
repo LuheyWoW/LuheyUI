@@ -18,47 +18,34 @@ jobs:
 
       - name: Set variables
         run: |
-          echo "TAG_NAME=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-          echo "ADDON_NAME=LuheyUI" >> $GITHUB_ENV
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "ADDON_NAME=LuheyUI" >> "$GITHUB_ENV"
 
-      - name: Create addon zip (WowUp-friendly)
+      - name: Package addon
         run: |
-          set -euo pipefail
-          mkdir -p dist
-
-          # Build a clean staging folder so the ZIP has LuheyUI/ at the root
-          rm -rf package
           mkdir -p "package/${ADDON_NAME}"
 
-          # If repo already has LuheyUI/ folder, copy that folder.
-          # Otherwise, copy repo root contents into package/LuheyUI excluding git + workflow stuff.
-          if [ -d "${ADDON_NAME}" ]; then
-            rsync -a "${ADDON_NAME}/" "package/${ADDON_NAME}/" \
-              --exclude=".git" \
-              --exclude=".github" \
-              --exclude="**:Zone.Identifier"
-          else
-            rsync -a "./" "package/${ADDON_NAME}/" \
-              --exclude=".git" \
-              --exclude=".github" \
-              --exclude="dist" \
-              --exclude="package" \
-              --exclude="**:Zone.Identifier"
-          fi
+          rsync -a ./ "package/${ADDON_NAME}/" \
+            --exclude=".git" \
+            --exclude=".gitignore" \
+            --exclude=".github" \
+            --exclude="dist" \
+            --exclude="package" \
+            --exclude="*.zip" \
+            --exclude="**:Zone.Identifier"
 
-          # Build a STABLE filename so WowUp "Install from URL" can always fetch latest
           cd package
-          zip -r "../dist/${ADDON_NAME}.zip" "${ADDON_NAME}"
-          cd ..
+          zip -r "../${ADDON_NAME}-${VERSION}.zip" "${ADDON_NAME}"
 
-          ls -lh dist
-          unzip -l "dist/${ADDON_NAME}.zip" | head -n 50
+          echo "Built ZIP with structure:"
+          unzip -l "../${ADDON_NAME}-${VERSION}.zip" | head -20
 
-      - name: Create/Update GitHub Release and upload asset (stable)
+      - name: Create GitHub Release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ env.TAG_NAME }}
-          file: dist/${{ env.ADDON_NAME }}.zip
-          asset_name: ${{ env.ADDON_NAME }}.zip
+          tag: ${{ github.ref_name }}
+          file: ${{ env.ADDON_NAME }}-${{ env.VERSION }}.zip
+          asset_name: ${{ env.ADDON_NAME }}-${{ env.VERSION }}.zip
           overwrite: true
